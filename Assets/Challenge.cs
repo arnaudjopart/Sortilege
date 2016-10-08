@@ -4,7 +4,7 @@ using System.Collections;
 public class Challenge {
 
 
-	public Challenge(int[] _vessels, int red,int green,int blue,int[] _recipe)
+	public Challenge(int[] _vessels, int red,int green,int blue,int[] _recipe,int _devScore)
     {
         Debug.Log( "challenge created" );
         m_vesselsArray = _vessels;
@@ -12,6 +12,7 @@ public class Challenge {
         m_nbOfGreen = green;
         m_nbOfBlue = blue;
         m_recipe = _recipe;
+        m_devScore = _devScore;
     }
 
     /// <summary>
@@ -25,9 +26,9 @@ public class Challenge {
     /// <param name="_vessels"></param>
     /// <param name="_recipe"></param>
     /// <returns></returns>
-    public static Challenge CreateChallenge(int _nbOfRed, int _nbOfGreen, int _nbOfBlue, int[] _vessels,int[] _recipe)
+    public static Challenge CreateChallenge(int _nbOfRed, int _nbOfGreen, int _nbOfBlue, int[] _vessels,int[] _recipe,int _devScore)
     {
-        return new Challenge( _vessels, _nbOfRed, _nbOfGreen, _nbOfBlue,_recipe );
+        return new Challenge( _vessels, _nbOfRed, _nbOfGreen, _nbOfBlue,_recipe, _devScore );
         
     }
 
@@ -54,4 +55,5 @@ public class Challenge {
     private int[] m_vesselsArray;
     private int m_nbRed,m_nbOfGreen, m_nbOfBlue;
     private int[] m_recipe;
+    private int m_devScore;
 }

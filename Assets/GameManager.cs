@@ -22,19 +22,17 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         m_chaudron.GameOverEvent += GameOver;
-        m_challengesList.Add( Challenge.CreateChallenge( 2, 3, 0, new int[] {2,1}, new int[] { 2, 0, 0 }  ));
-        m_challengesList.Add( Challenge.CreateChallenge( 2, 2, 2, new int[] { 1, 1, 1, 1 }, new int[] { 2, 0, 0 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 6, 0, 0, new int[] { 5, 2, 2, 1 }, new int[] { 3, 0, 0 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 8, 0, 0, new int[] { 5, 1, 3, 1 ,1,1}, new int[] { 7, 0, 0 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 2, 1, 0, new int[] { 2, 1, 2, 1 }, new int[] { 2, 1, 0 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 5, 5, 0, new int[] { 3, 1, 5, 1, 1, 1, 2, 1 }, new int[] { 4, 3, 0 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 5, 3, 0, new int[] { 2, 1, 4, 1, 2, 1, 2, 1 }, new int[] { 4, 0, 0 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 3, 7, 0, new int[] { 2, 1, 2, 1, 2, 1 }, new int[] { 1, 5, 0 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 8, 8, 5, new int[] { 5, 2, 3, 2, 2, 3,2, 1 }, new int[] { 1, 6, 4 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 8, 8, 5, new int[] { 5, 1, 3, 1, 2, 1, 2, 1 }, new int[] { 1, 6, 4 } ) );
-
+        m_challengesList.Add( Challenge.CreateChallenge( 2, 3, 0, new int[] {2,1}, new int[] { 2, 0, 0 },1  ));
+        m_challengesList.Add( Challenge.CreateChallenge( 2, 2, 2, new int[] { 1, 1, 1, 1 }, new int[] { 2, 0, 0 },2 ) );
+        m_challengesList.Add( Challenge.CreateChallenge( 6, 0, 0, new int[] { 5, 2, 2, 1 }, new int[] { 3, 0, 0 },3 ) );
+        m_challengesList.Add( Challenge.CreateChallenge( 8, 0, 0, new int[] { 5, 2, 3, 1 ,1,1}, new int[] { 7, 0, 0 } ,3) );
+        m_challengesList.Add( Challenge.CreateChallenge( 2, 1, 0, new int[] { 2, 1, 2, 1 }, new int[] { 2, 1, 0 },5 ) );
+        m_challengesList.Add( Challenge.CreateChallenge( 5, 5, 0, new int[] { 3, 1, 5, 1, 1, 1, 2, 1 }, new int[] { 4, 3, 0 } ,5) );
+        m_challengesList.Add( Challenge.CreateChallenge( 5, 3, 0, new int[] { 2, 1, 4, 1, 2, 1, 2, 1 }, new int[] { 4, 0, 0 } ,5) );
+        m_challengesList.Add( Challenge.CreateChallenge( 3, 7, 0, new int[] { 2, 1, 2, 1, 2, 1 }, new int[] { 1, 5, 0 },5 ) );
+        m_challengesList.Add( Challenge.CreateChallenge( 8, 8, 5, new int[] { 5, 2, 3, 2, 2, 3,2, 1 }, new int[] { 1, 6, 4 } ,5) );
+        m_challengesList.Add( Challenge.CreateChallenge( 5, 8, 3, new int[] { 5, 1, 3, 1, 2, 1, 2, 1 }, new int[] { 1, 6, 4 } ,5) );
         LoadLevel( m_currentChallenge );
-
     }
 	
 	// Update is called once per frame
