@@ -24,13 +24,14 @@ public class GameManager : MonoBehaviour {
         m_chaudron.GameOverEvent += GameOver;
         m_challengesList.Add( Challenge.CreateChallenge( 2, 3, 0, new int[] {2,1}, new int[] { 2, 0, 0 }  ));
         m_challengesList.Add( Challenge.CreateChallenge( 2, 2, 2, new int[] { 1, 1, 1, 1 }, new int[] { 2, 0, 0 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 6, 0, 0, new int[] { 5, 1, 2, 1 }, new int[] { 3, 0, 0 } ) );
+        m_challengesList.Add( Challenge.CreateChallenge( 6, 0, 0, new int[] { 5, 2, 2, 1 }, new int[] { 3, 0, 0 } ) );
         m_challengesList.Add( Challenge.CreateChallenge( 8, 0, 0, new int[] { 5, 1, 3, 1 ,1,1}, new int[] { 7, 0, 0 } ) );
         m_challengesList.Add( Challenge.CreateChallenge( 2, 1, 0, new int[] { 2, 1, 2, 1 }, new int[] { 2, 1, 0 } ) );
         m_challengesList.Add( Challenge.CreateChallenge( 5, 5, 0, new int[] { 3, 1, 5, 1, 1, 1, 2, 1 }, new int[] { 4, 3, 0 } ) );
         m_challengesList.Add( Challenge.CreateChallenge( 5, 3, 0, new int[] { 2, 1, 4, 1, 2, 1, 2, 1 }, new int[] { 4, 0, 0 } ) );
         m_challengesList.Add( Challenge.CreateChallenge( 3, 7, 0, new int[] { 2, 1, 2, 1, 2, 1 }, new int[] { 1, 5, 0 } ) );
-        m_challengesList.Add( Challenge.CreateChallenge( 8, 7, 5, new int[] { 5, 1, 3, 1, 2, 1 }, new int[] { 1, 6, 4 } ) );
+        m_challengesList.Add( Challenge.CreateChallenge( 8, 8, 5, new int[] { 5, 2, 3, 2, 2, 3,2, 1 }, new int[] { 1, 6, 4 } ) );
+        m_challengesList.Add( Challenge.CreateChallenge( 8, 8, 5, new int[] { 5, 1, 3, 1, 2, 1, 2, 1 }, new int[] { 1, 6, 4 } ) );
 
         LoadLevel( m_currentChallenge );
 
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour {
         m_vesselManager.LoadVessels( m_challengesList[_index ].GetListOfVessel() );
         m_recipeManager.LoadRecipe( m_challengesList[ _index ].GetRecipe() );
     }
-    private void Refresh()
+    public void Refresh()
     {
         print( "refresh" );
         m_reservesArray[ 0 ].Reset();
@@ -89,6 +90,18 @@ public class GameManager : MonoBehaviour {
         m_vesselManager.ClearVessels();
         m_recipeManager.ClearRecipe();
         m_currentChallenge += 1;
+        LoadLevel( m_currentChallenge );
+    }
+    public void Reset()
+    {
+        print( "reset" );
+        m_reservesArray[ 0 ].Reset();
+        m_reservesArray[ 1 ].Reset();
+        m_reservesArray[ 2 ].Reset();
+
+        m_vesselManager.ClearVessels();
+        m_recipeManager.ClearRecipe();
+        
         LoadLevel( m_currentChallenge );
     }
     private float m_startTimer;
