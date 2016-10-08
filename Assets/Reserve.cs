@@ -48,6 +48,18 @@ public class Reserve : MonoBehaviour {
             Destroy( m_listOfUnits[ 0]);
             m_listOfUnits.RemoveAt( 0 );
         }
+        m_currentNbOfUnits -= _nb;
+        m_currentNbOfUnits = Mathf.Max( m_currentNbOfUnits, 0 );
+    }
+    public void Fill(int _nbUnits)
+    {
+        for( int i = 0; i <  _nbUnits; i++ )
+        {
+            GameObject item = Instantiate(m_itemPrefab,Vector3.zero,Quaternion.identity) as GameObject;
+            item.GetComponent<Unit>().SetColor( m_colorOfItem );
+            item.transform.SetParent( m_transform, false );
+            m_listOfUnits.Add( item );
+        }
     }
 
     #region Private Elements

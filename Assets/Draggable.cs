@@ -25,10 +25,12 @@ public class Draggable : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDragH
     public void OnBeginDrag(PointerEventData eventData)
     {
         print( "OnBeginDrag" );
-        m_transform.SetParent( transform.parent.parent, false );
+        Invoke( "ChangeParent", .3f );
+
+        
         m_canvasGroup.blocksRaycasts = false;
         
-        
+
     }
     public void OnDrag(PointerEventData eventData)
     {
@@ -44,6 +46,10 @@ public class Draggable : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDragH
         m_canvasGroup.blocksRaycasts = true;
     }
 
+    private void ChangeParent()
+    {
+        m_transform.SetParent( transform.parent.parent, false );
+    }
     #region Private Members
     private Vector3 m_startPosition;
     private Transform m_transform;

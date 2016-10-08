@@ -13,6 +13,7 @@ public class Vessel : MonoBehaviour {
     public STATE m_currentState = STATE.EMPTY;
     public GameManager.CONTENTTYPE m_currentType;
     public List<Unit> m_listOfUnits = new List<Unit>();
+    public bool m_isUsed;
 
     // Use this for initialization
     #region Main Methods
@@ -30,24 +31,61 @@ public class Vessel : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        switch( m_currentState )
+        {
+            case STATE.EMPTY:
+                break;
+            case STATE.FILL:
+                break;
+            case STATE.FULL:
+                
+                break;
+            default:
+                break;
+        }
     }
 
     public void Fill(int _nbUnit, Color _color, GameManager.CONTENTTYPE _elementType)
     {
-        for(int i = 0; i < Mathf.Min( _nbUnit,m_totalNumberOfUnits);i++ )
+        m_isUsed = true;
+
+        for(int i =0; i< Mathf.Min( _nbUnit, m_totalNumberOfUnits );i++ )
         {
             m_listOfUnits[ i].SetColor( _color );
         }
         m_currentState = STATE.FILL;
+        m_currentNumberOfFilledUnits += _nbUnit;
 
         if(_nbUnit == m_totalNumberOfUnits )
         {
             m_currentState = STATE.FULL;
+            m_currentNumberOfFilledUnits = m_totalNumberOfUnits;
         }
         m_currentType = _elementType;
+        
     }
 
+    public void Empty(int _nbUnit)
+    {
+        for( int i =0;i< Mathf.Min( _nbUnit, m_totalNumberOfUnits ); i++ )
+        {
+            m_listOfUnits[ i ].SetColor( m_starColor );
+        }
+
+        m_currentState = STATE.FILL;
+        m_currentNumberOfFilledUnits -= _nbUnit; 
+
+        if( _nbUnit == m_totalNumberOfUnits )
+        {
+            m_currentState = STATE.EMPTY;
+            m_currentNumberOfFilledUnits = 0;
+            m_currentType = GameManager.CONTENTTYPE.NONE;
+            Destroy( gameObject );
+            
+        }
+        
+        
+    }
     #endregion
 
 

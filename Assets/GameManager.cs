@@ -4,10 +4,11 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
     public string[] m_ElementsNameArray;
-    public static Color[] m_ElementsColorArray;
+    public Color[] m_ElementsColorArray;
 
     public enum CONTENTTYPE { A = 0, B = 1, C = 2, D = 3, E = 4, F = 5, G = 6, H = 7,NONE = 8 };
     
+    public 
 
     // Use this for initialization
     void Start () {

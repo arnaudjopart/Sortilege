@@ -16,7 +16,7 @@ public class FillZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    
 	}
 
     public void OnDrop(PointerEventData eventData)
@@ -35,13 +35,21 @@ public class FillZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                 {
                     case Vessel.STATE.EMPTY:
 
-                        vessel.Fill( Mathf.Min( m_reserve.m_nbOfUnits, vessel.m_totalNumberOfUnits ), m_reserve.m_colorOfItem, m_reserve.m_currentContent );
-                        m_reserve.Empty( vessel.m_totalNumberOfUnits );
+                        vessel.Fill( Mathf.Min( m_reserve.m_currentNbOfUnits, vessel.m_totalNumberOfUnits ), m_reserve.m_colorOfItem, m_reserve.m_currentContent );
+                        m_reserve.Empty( Mathf.Min( m_reserve.m_currentNbOfUnits, vessel.m_totalNumberOfUnits ) );
 
                         break;
                     case Vessel.STATE.FILL:
+                        if( vessel.m_currentType == m_reserve.m_currentContent )
+                        {
+                            int delta = Mathf.Min(m_reserve.m_currentNbOfUnits,vessel.m_totalNumberOfUnits- vessel.m_currentNumberOfFilledUnits);
+                            vessel.Fill( Mathf.Min( m_reserve.m_currentNbOfUnits+vessel.m_currentNumberOfFilledUnits, vessel.m_totalNumberOfUnits ), m_reserve.m_colorOfItem, m_reserve.m_currentContent );
+                            m_reserve.Empty( delta );
+                        }
+                        
                         break;
                     case Vessel.STATE.FULL:
+
                         break;
                     default:
                         break;
