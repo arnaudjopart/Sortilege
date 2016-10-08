@@ -9,6 +9,7 @@ public class Chaudron : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     public event GameOverDelegate GameOverEvent;
 
     public RecipeManager m_recipeManager;
+    public ParticleSystem m_particle;
 	// Use this for initialization
 	void Start () {
 	
@@ -72,5 +73,9 @@ public class Chaudron : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     public void OnPointerExit(PointerEventData eventData)
     {
 
+    }
+    public void LaunchParticle()
+    {
+        m_particle.Play();
     }
 }

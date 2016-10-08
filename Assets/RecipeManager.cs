@@ -9,6 +9,7 @@ public class RecipeManager : MonoBehaviour {
     public int[] m_ingredientsArray;
     public GameObject ingredientsPrefab;
     public GameManager m_gameManager;
+    public Chaudron m_chaudron;
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +30,8 @@ public class RecipeManager : MonoBehaviour {
         if( m_gameManager.m_currentState!=GameManager.STATE.WIN )
         {
             m_gameManager.Win();
+            m_chaudron.LaunchParticle();
+            
         }       
 
 	}

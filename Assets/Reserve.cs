@@ -69,6 +69,7 @@ public class Reserve : MonoBehaviour {
         foreach(Transform obj in transform )
         {
             Destroy( obj.gameObject );
+            m_listOfUnits.Clear();
         }
     }
 
