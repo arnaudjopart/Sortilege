@@ -25,13 +25,15 @@ public class DispatchZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
     public void OnDrop(PointerEventData eventData)
     {
         print( eventData.pointerDrag.name );
+       
 
         if( eventData != null )
         {
             if( eventData.pointerDrag.GetComponent<Vessel>() != null )
             {
                 Vessel draggedVessel = eventData.pointerDrag.GetComponent<Vessel>();
-
+                int availableUnits = m_vessel.m_totalNumberOfUnits-m_vessel.m_currentNumberOfFilledUnits;
+                int delta;
                 switch( draggedVessel.m_currentState )
                 {
                     case Vessel.STATE.EMPTY:
@@ -40,11 +42,16 @@ public class DispatchZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
 
                         break;
                     case Vessel.STATE.FILL:
+                        
+                        delta = Mathf.Min( availableUnits, draggedVessel.m_currentNumberOfFilledUnits );
+                        m_vessel.Fill( m_vessel.m_currentNumberOfFilledUnits + delta, Color.black, draggedVessel.m_currentType );
+                        draggedVessel.Empty( delta );
                         break;
+
                     case Vessel.STATE.FULL:
-                        int availableUnits = m_vessel.m_totalNumberOfUnits-m_vessel.m_currentNumberOfFilledUnits;
-                        int delta = Mathf.Min( availableUnits, draggedVessel.m_currentNumberOfFilledUnits );
-                        m_vessel.Fill( delta, Color.black, draggedVessel.m_currentType );
+                        
+                        delta = Mathf.Min( availableUnits, draggedVessel.m_currentNumberOfFilledUnits );
+                        m_vessel.Fill( m_vessel.m_currentNumberOfFilledUnits+delta, Color.black, draggedVessel.m_currentType );
                         draggedVessel.Empty( delta );
 
 

@@ -6,7 +6,7 @@ public class Vessel : MonoBehaviour {
 
     public Color m_starColor;
     public int m_totalNumberOfUnits;
-    public int m_currentNumberOfFilledUnits;
+    public int m_currentNumberOfFilledUnits=0;
     public GameObject m_unitPrefab;
 
     public enum STATE { EMPTY, FILL, FULL};
@@ -20,7 +20,7 @@ public class Vessel : MonoBehaviour {
     void Awake()
     {
         m_transform = GetComponent<Transform>();
-        Init();
+        
     }
 
     void Start()
@@ -36,6 +36,7 @@ public class Vessel : MonoBehaviour {
             case STATE.EMPTY:
                 break;
             case STATE.FILL:
+                if( m_currentNumberOfFilledUnits == 0 ) m_currentState = STATE.EMPTY;
                 break;
             case STATE.FULL:
                 
@@ -47,7 +48,8 @@ public class Vessel : MonoBehaviour {
 
     public void Fill(int _nbUnit, Color _color, GameManager.CONTENTTYPE _elementType)
     {
-        m_isUsed = true;
+        //m_isUsed = true;
+        print( "fill:" + _nbUnit );
 
         for(int i =0; i< Mathf.Min( _nbUnit, m_totalNumberOfUnits );i++ )
         {
@@ -80,20 +82,20 @@ public class Vessel : MonoBehaviour {
             m_currentState = STATE.EMPTY;
             m_currentNumberOfFilledUnits = 0;
             m_currentType = GameManager.CONTENTTYPE.NONE;
-            Destroy( gameObject );
-            
-        }
-        
+            //Destroy( gameObject );            
+        }        
         
     }
+
     #endregion
 
 
     #region Utils
-    void Init()
+    public void Init(int _nbUnits, int _lives)
     {
+        m_totalNumberOfUnits = _nbUnits;
         m_currentType = GameManager.CONTENTTYPE.NONE;
-        for( int i = 0; i < m_totalNumberOfUnits; i++ )
+        for( int i = 0; i < _nbUnits; i++ )
         {
             GameObject item = Instantiate(m_unitPrefab,Vector3.zero,Quaternion.identity) as GameObject;
             Unit unit = item.GetComponent<Unit>();

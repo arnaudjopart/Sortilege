@@ -30,7 +30,7 @@ public class FillZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
             if( eventData.pointerDrag.GetComponent<Vessel>() != null )
             {
                 Vessel vessel = eventData.pointerDrag.GetComponent<Vessel>();
-
+                print( "vessel found" );
                 switch( vessel.m_currentState )
                 {
                     case Vessel.STATE.EMPTY:
@@ -43,7 +43,7 @@ public class FillZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         if( vessel.m_currentType == m_reserve.m_currentContent )
                         {
                             int delta = Mathf.Min(m_reserve.m_currentNbOfUnits,vessel.m_totalNumberOfUnits- vessel.m_currentNumberOfFilledUnits);
-                            vessel.Fill( Mathf.Min( m_reserve.m_currentNbOfUnits+vessel.m_currentNumberOfFilledUnits, vessel.m_totalNumberOfUnits ), m_reserve.m_colorOfItem, m_reserve.m_currentContent );
+                            vessel.Fill( vessel.m_currentNumberOfFilledUnits+ delta, m_reserve.m_colorOfItem, m_reserve.m_currentContent );
                             m_reserve.Empty( delta );
                         }
                         

@@ -18,19 +18,22 @@ public class Reserve : MonoBehaviour {
     void Awake()
     {
         m_transform = GetComponent<Transform>();
-        m_currentNbOfUnits = m_nbOfUnits;
+        
     }
 	void Start () {
-        Init();
+        //Init();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-    void Init()
+    public void Init(int _nbOfUnits)
     {
-        for(int i = 0; i < m_nbOfUnits; i++ )    
+        m_nbOfUnits = _nbOfUnits;
+        m_currentNbOfUnits = _nbOfUnits;
+
+        for(int i = 0; i < _nbOfUnits; i++ )    
         {
             GameObject item = Instantiate(m_itemPrefab,Vector3.zero,Quaternion.identity) as GameObject;
             item.GetComponent<Unit>().SetColor( m_colorOfItem );
@@ -59,6 +62,13 @@ public class Reserve : MonoBehaviour {
             item.GetComponent<Unit>().SetColor( m_colorOfItem );
             item.transform.SetParent( m_transform, false );
             m_listOfUnits.Add( item );
+        }
+    }
+    public void Reset()
+    {
+        foreach(Transform obj in transform )
+        {
+            Destroy( obj.gameObject );
         }
     }
 

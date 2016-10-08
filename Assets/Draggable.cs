@@ -9,13 +9,14 @@ public class Draggable : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDragH
     void Awake()
     {
         m_transform = GetComponent<Transform>();
-        m_parent = m_transform.parent;
+        
         m_canvasGroup = GetComponent<CanvasGroup>();
     }
 
     void Start () {
         m_startPosition = transform.position;
-	}
+        m_parent = m_transform.parent;
+    }
 	
 	// Update is called once per frame
 	void Update () {

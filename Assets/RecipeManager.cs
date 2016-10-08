@@ -7,19 +7,35 @@ public class RecipeManager : MonoBehaviour {
     public List<Ingredient> m_ingredientList = new List<Ingredient>();
     public int[] m_ingredientsArray;
     public GameObject ingredientsPrefab;
+    public GameManager m_gameManager;
 
 	// Use this for initialization
 	void Start () {
-        LoadRecipe();
+        //LoadRecipe();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+        foreach(int ingredientNeed in m_ingredientsArray )
+        {
+            if( ingredientNeed > 0 || ingredientNeed < 0 )
+            {
+                return;
+            }
+            
+        }
+        if( m_gameManager.m_currentState!=GameManager.STATE.WIN )
+        {
+            m_gameManager.Win();
+        }       
+
 	}
 
-    public void LoadRecipe()
+    public void LoadRecipe(int[] _ingredientsArray)
     {
+        m_ingredientsArray = _ingredientsArray;
+
         for(int i = 0; i< m_ingredientsArray.Length; i++ )
         {
             if( m_ingredientsArray[i] > 0 )
@@ -37,5 +53,15 @@ public class RecipeManager : MonoBehaviour {
         instance.transform.SetParent( transform, false );
         Ingredient ingredient = instance.GetComponent<Ingredient>();
         ingredient.Load( _indexOfIngredient, _quantity );
+        m_ingredientList.Add( ingredient );
+    }
+
+    public void ClearRecipe()
+    {
+        m_ingredientList.Clear();
+        foreach( Transform obj in transform )
+        {
+            Destroy( obj.gameObject );
+        }
     }
 }
