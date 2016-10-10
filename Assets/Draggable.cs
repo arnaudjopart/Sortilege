@@ -42,14 +42,20 @@ public class Draggable : MonoBehaviour, IBeginDragHandler,IDragHandler,IEndDragH
     public void OnEndDrag(PointerEventData eventData)
     {
         print( "OnEndDrag" );
+        Invoke( "StopDrag", .1f );
         //transform.position = m_startPosition;
-        m_transform.SetParent(m_parent, false );
-        m_canvasGroup.blocksRaycasts = true;
+       
     }
 
     private void ChangeParent()
     {
         m_transform.SetParent( transform.parent.parent, false );
+    }
+
+    private void StopDrag()
+    {
+        m_transform.SetParent( m_parent, false );
+        m_canvasGroup.blocksRaycasts = true;
     }
     #region Private Members
     private Vector3 m_startPosition;

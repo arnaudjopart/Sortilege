@@ -14,6 +14,7 @@ public class Vessel : MonoBehaviour {
     public enum STATE { EMPTY, FILL, FULL};
     public STATE m_currentState = STATE.EMPTY;
     public GameManager.CONTENTTYPE m_currentType;
+    public Color m_currentColor;
     public List<Unit> m_listOfUnits = new List<Unit>();
     public bool m_isUsed;
     public int m_lives;
@@ -62,6 +63,7 @@ public class Vessel : MonoBehaviour {
 
     public void Fill(int _nbUnit, Color _color, GameManager.CONTENTTYPE _elementType)
     {
+        m_currentColor = _color;
         //m_isUsed = true;
         print( "fill:" + _nbUnit );
 

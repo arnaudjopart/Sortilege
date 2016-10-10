@@ -10,9 +10,14 @@ public class Chaudron : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 
     public RecipeManager m_recipeManager;
     public ParticleSystem m_particle;
-	// Use this for initialization
-	void Start () {
-	
+    public ParticleSystem m_fire;
+    public ParticleSystem m_fire2;
+    public ParticleSystem m_feuFollet;
+    public AudioClip[] m_sounds;
+    public ParticleSystem m_explosionEffect;
+    // Use this for initialization
+    void Start () {
+        m_audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -37,20 +42,30 @@ public class Chaudron : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         if( m_recipeManager.m_ingredientsArray[ (int)ingredient.m_typeOfIngredient ] < 0 )
                         {
                             print( "Too many ingredients" );
+                            m_explosionEffect.Play();
+                            StopFire();
+                            m_audio.PlayOneShot( m_sounds[ 2 ] );
                             GameOverEvent();
                             return;
                         }else
                         {
+
+
                             if( m_recipeManager.m_ingredientsArray[ (int)ingredient.m_typeOfIngredient ] == 0 )
                             {
                                 print( "this ingredient is ok" );
                                 ingredient.Highlight();
                                 vessel.Empty( vessel.m_currentNumberOfFilledUnits );
+                                m_feuFollet.Play();
+                                
+                                m_audio.PlayOneShot( m_sounds[ 0 ] );
                                 return;
                             }else
                             {
                                 print( "Add this ingredient" );
                                 vessel.Empty( vessel.m_currentNumberOfFilledUnits );
+                                m_feuFollet.Play();
+                                m_audio.PlayOneShot( m_sounds[ 1 ] );
                                 return;
                             }
                         }
@@ -58,13 +73,25 @@ public class Chaudron : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
                         
                     }else
                     {
-                        GameOverEvent();
-                        print( "Not an ingredient from the recipe" );
+                        
                     }
                 }
+
+                GameOverEvent();
+                m_explosionEffect.Play();
+                StopFire();
+                vessel.Empty( vessel.m_currentNumberOfFilledUnits );
+                m_audio.PlayOneShot( m_sounds[ 2 ] );
+                print( "Not an ingredient from the recipe" );
+                return;
                 //Destroy( vessel.gameObject );
             }
         }
+    }
+    private void StopFire()
+    {
+        m_fire.Stop();
+        m_fire2.Stop();
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -78,4 +105,6 @@ public class Chaudron : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
     {
         m_particle.Play();
     }
+
+    private AudioSource m_audio;
 }

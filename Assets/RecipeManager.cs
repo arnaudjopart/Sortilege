@@ -38,14 +38,25 @@ public class RecipeManager : MonoBehaviour {
 
     public void LoadRecipe(int[] _ingredientsArray)
     {
-        m_ingredientsArray = _ingredientsArray;
 
+        m_ingredientList.Clear();
+        foreach(Transform trans in transform )
+        {
+            Destroy( trans.gameObject );
+        }
+        
         for(int i = 0; i< m_ingredientsArray.Length; i++ )
         {
-            if( m_ingredientsArray[i] > 0 )
+            if( _ingredientsArray.Length > i )
             {
-                AddNewIngredient(i, m_ingredientsArray[ i ] );
+                m_ingredientsArray[ i ] = _ingredientsArray[ i ];
+                if( m_ingredientsArray[ i ] > 0 )
+                {
+
+                    AddNewIngredient( i, m_ingredientsArray[ i ] );
+                }
             }
+            
         }
 
         

@@ -44,14 +44,14 @@ public class DispatchZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
                     case Vessel.STATE.FILL:
                         
                         delta = Mathf.Min( availableUnits, draggedVessel.m_currentNumberOfFilledUnits );
-                        m_vessel.Fill( m_vessel.m_currentNumberOfFilledUnits + delta, Color.black, draggedVessel.m_currentType );
+                        m_vessel.Fill( m_vessel.m_currentNumberOfFilledUnits + delta, draggedVessel.m_currentColor, draggedVessel.m_currentType );
                         draggedVessel.Empty( delta );
                         break;
 
                     case Vessel.STATE.FULL:
                         
                         delta = Mathf.Min( availableUnits, draggedVessel.m_currentNumberOfFilledUnits );
-                        m_vessel.Fill( m_vessel.m_currentNumberOfFilledUnits+delta, Color.black, draggedVessel.m_currentType );
+                        m_vessel.Fill( m_vessel.m_currentNumberOfFilledUnits+delta, draggedVessel.m_currentColor, draggedVessel.m_currentType );
                         draggedVessel.Empty( delta );
 
 
